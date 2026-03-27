@@ -151,13 +151,13 @@
 
 <script type="module">
   import { initializeApp }   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getAuth, signInWithEmailAndPassword, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut }
+  import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut }
                               from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
   import { getFirestore, collection, query, where, getDocs, doc, deleteDoc, updateDoc }
                               from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const app = initializeApp({
-    apiKey: "AIzaSyDzUD-kHn-0JeyKbZsoXGfliev9Dmok1XY",
+    apiKey: "AIzaSyCsesROVseW1s3dDvaJW26PZot6_ZGVnUw",
     authDomain:        "my-app-eugen-f57ab.firebaseapp.com",
     projectId:         "my-app-eugen-f57ab",
     storageBucket: "my-app-eugen-f57ab.firebasestorage.app",
@@ -207,7 +207,7 @@
     const btn = document.getElementById('btn-google');
     btn.disabled = true; btn.textContent = 'Signing in...';
     try {
-      await signInWithRedirect(auth, new GoogleAuthProvider());
+      const r = await signInWithPopup(auth, new GoogleAuthProvider()); populateUser(r.user); showSection('section-choose');
     } catch(e) { showError('login-error', e.message || 'Google sign-in failed.'); btn.disabled = false; btn.innerHTML = '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" /> Continue with Google'; }
   };
 
