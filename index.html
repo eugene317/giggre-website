@@ -6,95 +6,217 @@
   <title>Giggre – Gig Economy Platform</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #2d3748; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f4f8; color: #1a202c; }
 
-    header {
-      background: linear-gradient(135deg, #1B6CA8 0%, #154f80 100%);
-      color: white;
-      padding: 60px 24px;
-      text-align: center;
+    /* NAV */
+    nav {
+      background: white;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    header h1 { font-size: 42px; font-weight: 800; letter-spacing: -1px; }
-    header p { font-size: 18px; opacity: 0.85; margin-top: 12px; }
+    nav img { height: 36px; }
+    nav a {
+      color: #1B6CA8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      background: #ebf4ff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    nav a:hover { background: #d0e8ff; }
 
-    .badge {
-      display: inline-block;
-      background: #F5A623;
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1B6CA8 0%, #0f4c75 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 24px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='30'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; }
+    .hero img { height: 90px; margin-bottom: 24px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+    .hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+    .hero p { font-size: 18px; opacity: 0.88; max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
+    .hero-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
       color: white;
       font-size: 13px;
-      font-weight: 700;
-      padding: 4px 14px;
+      font-weight: 600;
+      padding: 6px 16px;
       border-radius: 20px;
-      margin-bottom: 20px;
-      letter-spacing: 0.5px;
+      backdrop-filter: blur(4px);
     }
 
-    .container { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+    /* WAVE */
+    .wave { display: block; margin-top: -2px; }
 
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 48px; }
+    /* CONTAINER */
+    .container { max-width: 900px; margin: 0 auto; padding: 56px 24px 80px; }
 
+    /* SECTION TITLE */
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #1B6CA8;
+      margin-bottom: 16px;
+    }
+
+    /* CARDS */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 56px; }
     .card {
       background: white;
-      border-radius: 16px;
-      padding: 28px 24px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-radius: 20px;
+      padding: 32px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .card .icon { font-size: 36px; margin-bottom: 14px; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .card .icon {
+      width: 60px; height: 60px;
+      background: #ebf4ff;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px;
+    }
     .card h3 { font-size: 17px; font-weight: 700; color: #1B6CA8; margin-bottom: 8px; }
-    .card p { font-size: 14px; color: #718096; line-height: 1.6; }
+    .card p { font-size: 14px; color: #718096; line-height: 1.65; }
 
-    .links-section { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
-    .links-section h2 { font-size: 18px; font-weight: 700; color: #2d3748; margin-bottom: 20px; }
+    /* DOWNLOAD */
+    .download-section {
+      background: linear-gradient(135deg, #1B6CA8, #0f4c75);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+      margin-bottom: 56px;
+      color: white;
+    }
+    .download-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .download-section p { font-size: 15px; opacity: 0.85; margin-bottom: 24px; }
+    .store-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: #1a202c;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+    .store-btn:hover { transform: scale(1.03); }
+    .store-btn .store-icon { font-size: 22px; }
 
+    /* LINKS */
+    .links-section { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .links-section h2 { font-size: 18px; font-weight: 700; color: #1a202c; margin-bottom: 4px; }
+    .links-section .sub { font-size: 13px; color: #a0aec0; margin-bottom: 20px; }
     .link-item {
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 0;
+      border-bottom: 1px solid #f0f4f8;
       text-decoration: none;
       color: #2d3748;
-      transition: color 0.2s;
+      transition: all 0.2s;
+      border-radius: 4px;
     }
-    .link-item:last-child { border-bottom: none; }
-    .link-item:hover { color: #1B6CA8; }
+    .link-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .link-item:hover { color: #1B6CA8; padding-left: 4px; }
     .link-item .link-icon {
-      width: 40px; height: 40px;
+      width: 44px; height: 44px;
       background: #ebf4ff;
-      border-radius: 10px;
+      border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
       flex-shrink: 0;
     }
     .link-item .link-text strong { display: block; font-size: 15px; font-weight: 600; }
-    .link-item .link-text span { font-size: 13px; color: #718096; }
-    .link-item .arrow { margin-left: auto; color: #a0aec0; font-size: 18px; }
+    .link-item .link-text span { font-size: 13px; color: #a0aec0; }
+    .link-item .arrow { margin-left: auto; color: #cbd5e0; font-size: 20px; font-weight: 300; }
 
-    footer { text-align: center; padding: 24px; font-size: 13px; color: #a0aec0; }
-    a { color: #1B6CA8; }
+    /* FOOTER */
+    footer {
+      background: white;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 13px;
+      color: #a0aec0;
+    }
+    footer a { color: #1B6CA8; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-logo { height: 24px; opacity: 0.4; margin-bottom: 10px; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="badge">Gig Economy Platform</div>
-  <img src="logo.png" alt="Giggre" style="height:80px;margin-bottom:12px;" />
-  <p>Connecting GigHosts and GigWorkers — fast, easy, and reliable.</p>
-</header>
+<!-- NAV -->
+<nav>
+  <img src="logo.png" alt="Giggre" />
+  <a href="mailto:support@giggre.app">Contact Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <img src="logo.png" alt="Giggre Logo" />
+    <h1>Work Smarter, Hire Faster</h1>
+    <p>The platform connecting GigHosts and GigWorkers — find jobs or fill shifts instantly.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">🚀 Quick Gig</span>
+      <span class="hero-badge">🏢 For Businesses</span>
+      <span class="hero-badge">👷 For Workers</span>
+    </div>
+  </div>
+</div>
+<svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48">
+  <path fill="#f0f4f8" d="M0,48L1440,0L1440,48L0,48Z"/>
+</svg>
 
 <div class="container">
 
+  <!-- FEATURES -->
+  <p class="section-title">What We Offer</p>
   <div class="cards">
     <div class="card">
       <div class="icon">🏢</div>
       <h3>For GigHosts</h3>
-      <p>Post gig jobs, find qualified workers, and manage your gigs all in one place.</p>
+      <p>Post gig jobs, find qualified workers, and manage your shifts all in one place.</p>
     </div>
     <div class="card">
       <div class="icon">👷</div>
       <h3>For GigWorkers</h3>
-      <p>Browse available gigs, apply instantly, and start earning on your schedule.</p>
+      <p>Browse available gigs, apply instantly, and start earning on your own schedule.</p>
     </div>
     <div class="card">
       <div class="icon">⚡</div>
@@ -103,8 +225,33 @@
     </div>
   </div>
 
+  <!-- DOWNLOAD -->
+  <div class="download-section">
+    <h2>Download the App</h2>
+    <p>Available on Android — iOS coming soon.</p>
+    <div class="store-buttons">
+      <a href="#" class="store-btn">
+        <span class="store-icon">▶</span>
+        <div style="text-align:left;">
+          <div style="font-size:11px;opacity:0.6;">GET IT ON</div>
+          <div>Google Play</div>
+        </div>
+      </a>
+      <a href="#" class="store-btn" style="opacity:0.6;pointer-events:none;">
+        <span class="store-icon"></span>
+        <div style="text-align:left;">
+          <div style="font-size:11px;opacity:0.6;">COMING SOON</div>
+          <div>App Store</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- LEGAL -->
+  <p class="section-title">Legal &amp; Support</p>
   <div class="links-section">
-    <h2>Legal &amp; Support</h2>
+    <h2>Resources</h2>
+    <p class="sub">Legal documents and account management</p>
 
     <a href="privacy/" class="link-item">
       <div class="link-icon">🔒</div>
@@ -137,8 +284,14 @@
 
 </div>
 
+<!-- FOOTER -->
 <footer>
-  &copy; 2026 Giggre. All rights reserved. &nbsp;·&nbsp; <a href="mailto:support@giggre.app">support@giggre.app</a>
+  <img src="logo.png" alt="Giggre" class="footer-logo" /><br/>
+  &copy; 2026 Giggre. All rights reserved.
+  &nbsp;·&nbsp;
+  <a href="mailto:support@giggre.app">support@giggre.app</a>
+  &nbsp;·&nbsp;
+  <a href="privacy/">Privacy Policy</a>
 </footer>
 
 </body>
