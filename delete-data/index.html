@@ -151,7 +151,7 @@
 
 <script type="module">
   import { initializeApp }   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut }
+  import { getAuth, signInWithEmailAndPassword, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut }
                               from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
   import { getFirestore, collection, query, where, getDocs, doc, deleteDoc, updateDoc }
                               from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
@@ -192,6 +192,10 @@
     if (user) { populateUser(user); showSection('section-choose'); }
   });
 
+  getRedirectResult(auth).then(r => {
+    if (r && r.user) { populateUser(r.user); showSection('section-choose'); }
+  }).catch(e => { showError('login-error', e.message || 'Google sign-in failed.'); });
+
   window.selectOption = (type, el) => {
     document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
@@ -203,10 +207,8 @@
     const btn = document.getElementById('btn-google');
     btn.disabled = true; btn.textContent = 'Signing in...';
     try {
-      const r = await signInWithPopup(auth, new GoogleAuthProvider());
-      populateUser(r.user); showSection('section-choose');
-    } catch(e) { showError('login-error', e.message || 'Google sign-in failed.'); }
-    finally { btn.disabled = false; btn.innerHTML = '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" /> Continue with Google'; }
+      await signInWithRedirect(auth, new GoogleAuthProvider());
+    } catch(e) { showError('login-error', e.message || 'Google sign-in failed.'); btn.disabled = false; btn.innerHTML = '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" /> Continue with Google'; }
   };
 
   window.signInEmail = async () => {
