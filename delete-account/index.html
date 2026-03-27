@@ -188,10 +188,6 @@
     if (user) { populateUser(user); showSection('section-confirm'); }
   });
 
-  getRedirectResult(auth).then(r => {
-    if (r && r.user) { populateUser(r.user); showSection('section-confirm'); }
-  }).catch(e => { showError('login-error', e.message || 'Google sign-in failed.'); });
-
   window.signInGoogle = async () => {
     hideError('login-error');
     const btn = document.getElementById('btn-google');

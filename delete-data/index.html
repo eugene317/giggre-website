@@ -192,10 +192,6 @@
     if (user) { populateUser(user); showSection('section-choose'); }
   });
 
-  getRedirectResult(auth).then(r => {
-    if (r && r.user) { populateUser(r.user); showSection('section-choose'); }
-  }).catch(e => { showError('login-error', e.message || 'Google sign-in failed.'); });
-
   window.selectOption = (type, el) => {
     document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
