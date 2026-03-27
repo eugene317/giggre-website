@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Account – Giggre</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #2d3748; line-height: 1.7; }
+    header { background: linear-gradient(135deg, #1B6CA8 0%, #154f80 100%); color: white; padding: 40px 24px 32px; text-align: center; }
+    header a { color: rgba(255,255,255,0.7); font-size: 13px; text-decoration: none; display: block; margin-bottom: 12px; }
+    header a:hover { color: white; }
+    header h1 { font-size: 28px; font-weight: 700; }
+    header p { font-size: 14px; opacity: 0.8; margin-top: 6px; }
+    .container { max-width: 520px; margin: 0 auto; padding: 40px 24px 80px; }
+    .card { background: white; border-radius: 16px; padding: 32px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    h2 { font-size: 18px; font-weight: 700; color: #2d3748; margin-bottom: 6px; }
+    .subtitle { font-size: 14px; color: #718096; margin-bottom: 24px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #4a5568; margin-bottom: 5px; margin-top: 14px; }
+    input { width: 100%; padding: 12px 14px; border: 1.5px solid #cbd5e0; border-radius: 10px; font-size: 15px; font-family: inherit; outline: none; transition: border 0.2s; }
+    input:focus { border-color: #1B6CA8; }
+    .btn { display: block; width: 100%; padding: 14px; border: none; border-radius: 30px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 20px; font-family: inherit; transition: opacity 0.2s; text-align: center; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-blue { background: #1B6CA8; color: white; }
+    .btn-blue:hover:not(:disabled) { background: #154f80; }
+    .btn-google { background: white; color: #2d3748; border: 1.5px solid #cbd5e0; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .btn-google:hover:not(:disabled) { background: #f7fafc; }
+    .btn-red { background: #e53e3e; color: white; }
+    .btn-red:hover:not(:disabled) { background: #c53030; }
+    .btn-outline { background: white; color: #718096; border: 1.5px solid #cbd5e0; }
+    .divider { display: flex; align-items: center; gap: 12px; margin: 16px 0; color: #a0aec0; font-size: 13px; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+    .error { background: #fff5f5; border: 1px solid #feb2b2; border-radius: 10px; padding: 12px 14px; color: #c53030; font-size: 14px; margin-top: 14px; display: none; }
+    .warning { background: #fff5f5; border-left: 4px solid #e53e3e; border-radius: 0 8px 8px 0; padding: 14px 16px; font-size: 14px; color: #742a2a; margin: 16px 0; }
+    .info { background: #ebf4ff; border-left: 4px solid #1B6CA8; border-radius: 0 8px 8px 0; padding: 14px 16px; font-size: 14px; color: #2c5282; margin: 16px 0; }
+    .user-info { display: flex; align-items: center; gap: 12px; padding: 14px; background: #f7fafc; border-radius: 10px; margin-bottom: 20px; }
+    .user-avatar { width: 44px; height: 44px; border-radius: 50%; background: #1B6CA8; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; font-weight: 700; flex-shrink: 0; overflow: hidden; }
+    .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .user-name { font-weight: 600; font-size: 15px; }
+    .user-email { font-size: 13px; color: #718096; }
+    ul { margin: 8px 0 0 20px; font-size: 14px; color: #4a5568; }
+    ul li { margin-bottom: 5px; }
+    .progress { margin: 16px 0; }
+    .progress-label { font-size: 13px; color: #718096; margin-bottom: 6px; }
+    .progress-bar { height: 6px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: #1B6CA8; border-radius: 10px; transition: width 0.4s ease; width: 0%; }
+    .loading { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .section { display: none; }
+    .section.active { display: block; }
+    .success { text-align: center; padding: 10px 0; }
+    .success .icon { font-size: 48px; margin-bottom: 12px; }
+    footer { text-align: center; padding: 24px; font-size: 13px; color: #a0aec0; }
+    a { color: #1B6CA8; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/">← Back to Giggre</a>
+  <h1>Delete Account</h1>
+  <p>Permanently remove your Giggre account and all data</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <!-- SECTION 1: Login -->
+    <div id="section-login" class="section active">
+      <h2>Sign in to continue</h2>
+      <p class="subtitle">Verify your identity before deleting your account.</p>
+
+      <button class="btn btn-google" onclick="signInGoogle()" id="btn-google">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" />
+        Continue with Google
+      </button>
+
+      <div class="divider">or</div>
+
+      <label>Email address</label>
+      <input type="email" id="login-email" placeholder="you@example.com" />
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Your password" />
+      <div class="error" id="login-error"></div>
+      <button class="btn btn-blue" onclick="signInEmail()" id="btn-email-login">Sign In</button>
+    </div>
+
+    <!-- SECTION 2: Confirm -->
+    <div id="section-confirm" class="section">
+      <h2>Delete your account?</h2>
+      <p class="subtitle">This action is permanent and cannot be undone.</p>
+
+      <div class="user-info">
+        <div class="user-avatar" id="user-avatar">?</div>
+        <div>
+          <div class="user-name" id="user-display-name">—</div>
+          <div class="user-email" id="user-display-email">—</div>
+        </div>
+      </div>
+
+      <div class="warning">
+        ⚠️ <strong>The following will be permanently deleted:</strong>
+        <ul>
+          <li>Your profile and personal information</li>
+          <li>All gig postings and applications</li>
+          <li>Your account balance and history</li>
+          <li>All pending ratings about you</li>
+          <li>Your login credentials</li>
+        </ul>
+      </div>
+
+      <div class="info">
+        ℹ️ Chat messages and ratings you gave others will be <strong>anonymized</strong> ("Deleted User") to preserve other users' records.
+      </div>
+
+      <div class="error" id="delete-error"></div>
+
+      <button class="btn btn-red" onclick="deleteAccount()" id="btn-delete">
+        Delete My Account Permanently
+      </button>
+      <button class="btn btn-outline" onclick="cancelDelete()" style="margin-top:10px;">Cancel</button>
+    </div>
+
+    <!-- SECTION 3: Deleting (progress) -->
+    <div id="section-deleting" class="section">
+      <h2>Deleting your account...</h2>
+      <p class="subtitle">Please do not close this page.</p>
+      <div class="progress">
+        <div class="progress-label" id="progress-label">Preparing...</div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Success -->
+    <div id="section-success" class="section">
+      <div class="success">
+        <div class="icon">✅</div>
+        <h2>Account Deleted</h2>
+        <p style="margin-top:10px; color:#718096; font-size:15px;">Your account and all associated data have been permanently deleted from Giggre.</p>
+        <p style="margin-top:8px; color:#718096; font-size:14px;">Thank you for using Giggre.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>&copy; 2026 Giggre. All rights reserved. · <a href="/privacy/">Privacy Policy</a></footer>
+
+<script type="module">
+  import { initializeApp }           from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut }
+                                      from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getFirestore, collection, query, where, getDocs, doc, deleteDoc, updateDoc, getDoc }
+                                      from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const app = initializeApp({
+    apiKey:            "AIzaSyD1HWBtKEJI_rdPLGHmgtnuMnOfXa2nFeo",
+    authDomain:        "my-app-eugen-f57ab.firebaseapp.com",
+    projectId:         "my-app-eugen-f57ab",
+    storageBucket:     "my-app-eugen-f57ab.appspot.com",
+    messagingSenderId: "812127960669",
+    appId:             "1:812127960669:web:d6612d8b24a8f0756797b4"
+  });
+
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+  function showError(id, msg) { const e = document.getElementById(id); e.textContent = msg; e.style.display = 'block'; }
+  function hideError(id) { document.getElementById(id).style.display = 'none'; }
+  function setProgress(pct, label) {
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = label;
+  }
+
+  function populateUser(user) {
+    document.getElementById('user-display-name').textContent = user.displayName || 'Giggre User';
+    document.getElementById('user-display-email').textContent = user.email || '';
+    const avatar = document.getElementById('user-avatar');
+    if (user.photoURL) avatar.innerHTML = `<img src="${user.photoURL}" />`;
+    else avatar.textContent = (user.displayName || user.email || '?')[0].toUpperCase();
+  }
+
+  onAuthStateChanged(auth, user => {
+    if (user) { populateUser(user); showSection('section-confirm'); }
+  });
+
+  window.signInGoogle = async () => {
+    hideError('login-error');
+    const btn = document.getElementById('btn-google');
+    btn.disabled = true; btn.textContent = 'Signing in...';
+    try {
+      const r = await signInWithPopup(auth, new GoogleAuthProvider());
+      populateUser(r.user); showSection('section-confirm');
+    } catch(e) { showError('login-error', e.message || 'Google sign-in failed.'); }
+    finally { btn.disabled = false; btn.innerHTML = '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" height="20" /> Continue with Google'; }
+  };
+
+  window.signInEmail = async () => {
+    const email = document.getElementById('login-email').value.trim();
+    const pass  = document.getElementById('login-password').value;
+    if (!email || !pass) { showError('login-error', 'Please enter your email and password.'); return; }
+    hideError('login-error');
+    const btn = document.getElementById('btn-email-login');
+    btn.disabled = true; btn.innerHTML = '<span class="loading"></span> Signing in...';
+    try {
+      const r = await signInWithEmailAndPassword(auth, email, pass);
+      populateUser(r.user); showSection('section-confirm');
+    } catch(e) {
+      showError('login-error', e.code === 'auth/invalid-credential' ? 'Incorrect email or password.' : (e.message || 'Sign-in failed.'));
+    } finally { btn.disabled = false; btn.textContent = 'Sign In'; }
+  };
+
+  window.cancelDelete = async () => { await signOut(auth); showSection('section-login'); };
+
+  window.deleteAccount = async () => {
+    hideError('delete-error');
+    const user = auth.currentUser;
+    if (!user) { showError('delete-error', 'Session expired. Please refresh and sign in again.'); return; }
+    const uid = user.uid;
+    showSection('section-deleting');
+
+    try {
+      // 1. Delete applications
+      setProgress(10, 'Deleting applications...');
+      const apps = await getDocs(query(collection(db, 'applications'), where('workerId', '==', uid)));
+      for (const d of apps.docs) await deleteDoc(d.ref);
+
+      // 2. Delete gigs
+      setProgress(20, 'Deleting gig postings...');
+      const gigs = await getDocs(query(collection(db, 'gigs'), where('hostId', '==', uid)));
+      for (const d of gigs.docs) await deleteDoc(d.ref);
+
+      // 3. Delete verification requests
+      setProgress(30, 'Deleting verification data...');
+      const verify = await getDocs(query(collection(db, 'verificationRequests'), where('userId', '==', uid)));
+      for (const d of verify.docs) await deleteDoc(d.ref);
+
+      // 4. Delete calls
+      setProgress(40, 'Deleting call history...');
+      const callsCaller = await getDocs(query(collection(db, 'calls'), where('callerId', '==', uid)));
+      for (const d of callsCaller.docs) await deleteDoc(d.ref);
+      const callsCallee = await getDocs(query(collection(db, 'calls'), where('calleeId', '==', uid)));
+      for (const d of callsCallee.docs) await deleteDoc(d.ref);
+
+      // 5. Delete pending ratings
+      setProgress(50, 'Deleting ratings...');
+      const pending = await getDocs(query(collection(db, 'pendingRatings'), where('ratedUserId', '==', uid)));
+      for (const d of pending.docs) await deleteDoc(d.ref);
+
+      // 6. Anonymize ratings given by this user
+      setProgress(60, 'Anonymizing your ratings...');
+      const ratings = await getDocs(query(collection(db, 'ratings'), where('fromUserId', '==', uid)));
+      for (const d of ratings.docs) await updateDoc(d.ref, { fromUserName: 'Deleted User' });
+
+      // 7. Anonymize chat messages
+      setProgress(70, 'Anonymizing chat messages...');
+      const chatRooms = await getDocs(collection(db, 'chatRooms'));
+      for (const room of chatRooms.docs) {
+        const msgs = await getDocs(query(collection(db, 'chatRooms', room.id, 'messages'), where('senderId', '==', uid)));
+        for (const m of msgs.docs) await updateDoc(m.ref, { senderName: 'Deleted User' });
+      }
+
+      // 8. Delete user Firestore doc
+      setProgress(85, 'Deleting your profile...');
+      await deleteDoc(doc(db, 'users', uid));
+
+      // 9. Delete Firebase Auth account
+      setProgress(95, 'Deleting your account...');
+      await user.delete();
+
+      setProgress(100, 'Done!');
+      setTimeout(() => showSection('section-success'), 600);
+
+    } catch(e) {
+      showSection('section-confirm');
+      showError('delete-error', e.message || 'Failed to delete account. Please try again.');
+    }
+  };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giggre – Gig Economy Platform</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #2d3748; }
+
+    header {
+      background: linear-gradient(135deg, #1B6CA8 0%, #154f80 100%);
+      color: white;
+      padding: 60px 24px;
+      text-align: center;
+    }
+    header h1 { font-size: 42px; font-weight: 800; letter-spacing: -1px; }
+    header p { font-size: 18px; opacity: 0.85; margin-top: 12px; }
+
+    .badge {
+      display: inline-block;
+      background: #F5A623;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 48px; }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      text-align: center;
+    }
+    .card .icon { font-size: 36px; margin-bottom: 14px; }
+    .card h3 { font-size: 17px; font-weight: 700; color: #1B6CA8; margin-bottom: 8px; }
+    .card p { font-size: 14px; color: #718096; line-height: 1.6; }
+
+    .links-section { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .links-section h2 { font-size: 18px; font-weight: 700; color: #2d3748; margin-bottom: 20px; }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #e2e8f0;
+      text-decoration: none;
+      color: #2d3748;
+      transition: color 0.2s;
+    }
+    .link-item:last-child { border-bottom: none; }
+    .link-item:hover { color: #1B6CA8; }
+    .link-item .link-icon {
+      width: 40px; height: 40px;
+      background: #ebf4ff;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .link-item .link-text strong { display: block; font-size: 15px; font-weight: 600; }
+    .link-item .link-text span { font-size: 13px; color: #718096; }
+    .link-item .arrow { margin-left: auto; color: #a0aec0; font-size: 18px; }
+
+    footer { text-align: center; padding: 24px; font-size: 13px; color: #a0aec0; }
+    a { color: #1B6CA8; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Gig Economy Platform</div>
+  <h1>Giggre</h1>
+  <p>Connecting GigHosts and GigWorkers — fast, easy, and reliable.</p>
+</header>
+
+<div class="container">
+
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🏢</div>
+      <h3>For GigHosts</h3>
+      <p>Post gig jobs, find qualified workers, and manage your gigs all in one place.</p>
+    </div>
+    <div class="card">
+      <div class="icon">👷</div>
+      <h3>For GigWorkers</h3>
+      <p>Browse available gigs, apply instantly, and start earning on your schedule.</p>
+    </div>
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Quick Gig</h3>
+      <p>Go online and get matched with nearby gigs instantly — no waiting required.</p>
+    </div>
+  </div>
+
+  <div class="links-section">
+    <h2>Legal &amp; Support</h2>
+
+    <a href="/privacy/" class="link-item">
+      <div class="link-icon">🔒</div>
+      <div class="link-text">
+        <strong>Privacy Policy</strong>
+        <span>How we collect, use, and protect your data</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="/delete-account/" class="link-item">
+      <div class="link-icon">🗑️</div>
+      <div class="link-text">
+        <strong>Delete Account</strong>
+        <span>Permanently delete your Giggre account</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a href="/delete-data/" class="link-item">
+      <div class="link-icon">📋</div>
+      <div class="link-text">
+        <strong>Delete My Data</strong>
+        <span>Request deletion of your personal data</span>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 Giggre. All rights reserved. &nbsp;·&nbsp; <a href="mailto:support@giggre.app">support@giggre.app</a>
+</footer>
+
+</body>
+</html>
